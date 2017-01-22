@@ -55,7 +55,7 @@ angular.module('starter')
       }
     }).then($scope.initSearch).catch(function (x) {
       console.log('erreur survenue');
-      $scope.logs.unshift(x);
+      $scope.logs.unshift(x.message.replace('<br />', '').replace('<br />', ' '));
     }).finally($ionicLoading.hide);
 
   };
