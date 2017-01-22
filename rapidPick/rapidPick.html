@@ -1,0 +1,58 @@
+<ion-view title="Rapid Pick">
+  <ion-nav-buttons side="secondary">
+    <button class="button" ng-click="logout()">Déconnexion</button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <div class="centered-form">
+
+        <form ng-submit="scan()">
+
+      <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="Recherche" ng-model="form.reference" id="search"></input>
+          </label>
+          <button type="submit" class="button">Scan</button>
+        </div>
+
+      </form>
+
+      <div class="item">
+        
+        <div ng-show="pick">
+          <div class="card">
+           <h2>Coli n° {{ pick.reference }}</h2>
+          </div>
+
+          <div class="card" ng-show="pick.is_cn23">
+            <h1 style="color:red;">CN23 !</h1>
+          </div>
+
+          <div class="card" ng-hide="pick.is_letter">
+            <button class="button" ng-click="validate()">Ré-imprimer</button>
+          </div>
+          <form ng-submit="validate()">
+            <div class="card" ng-show="pick.is_letter">
+             <h2>Lettre n°</h2>
+              <label>Numéro <input type="text" ng-model="pick.letter"></input>
+              </label>
+              <button class="button" ng-disable="pick.letter.length">Confirmer</button>
+            </div>
+          </form>
+
+
+        </div>
+
+  
+      </div>
+      <div class="item">
+            <p ng-repeat="log in logs | limitTo: 30 track by $index">
+              {{ log }}
+            </p>
+            <p ng-show="logs.length"><button ng-click="clearLogs()" class="button button-small" title="Vider">X</button></p>
+      </div>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>
